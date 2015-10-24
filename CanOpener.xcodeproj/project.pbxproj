@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BC01BEEB1BDBD93500AC21AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC01BEEA1BDBD93500AC21AB /* AppDelegate.swift */; };
+		BC01BEED1BDBD93500AC21AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC01BEEC1BDBD93500AC21AB /* Assets.xcassets */; };
+		BC01BEF01BDBD93500AC21AB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */; };
+		BC01BEFB1BDBD93500AC21AB /* CanOpenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC01BEFA1BDBD93500AC21AB /* CanOpenerTests.swift */; };
+		BC01BF061BDBD93500AC21AB /* CanOpenerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC01BF051BDBD93500AC21AB /* CanOpenerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC01BEF71BDBD93500AC21AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC01BEDF1BDBD93500AC21AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC01BEE61BDBD93500AC21AB;
+			remoteInfo = CanOpener;
+		};
+		BC01BF021BDBD93500AC21AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC01BEDF1BDBD93500AC21AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC01BEE61BDBD93500AC21AB;
+			remoteInfo = CanOpener;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BC01BEE71BDBD93500AC21AB /* CanOpener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanOpener.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC01BEEA1BDBD93500AC21AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BC01BEEC1BDBD93500AC21AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BC01BEEF1BDBD93500AC21AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BC01BEF11BDBD93500AC21AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC01BEF61BDBD93500AC21AB /* CanOpenerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanOpenerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC01BEFA1BDBD93500AC21AB /* CanOpenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanOpenerTests.swift; sourceTree = "<group>"; };
+		BC01BEFC1BDBD93500AC21AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC01BF011BDBD93500AC21AB /* CanOpenerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanOpenerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC01BF051BDBD93500AC21AB /* CanOpenerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanOpenerUITests.swift; sourceTree = "<group>"; };
+		BC01BF071BDBD93500AC21AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BC01BEE41BDBD93500AC21AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC01BEF31BDBD93500AC21AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC01BEFE1BDBD93500AC21AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BC01BEDE1BDBD93500AC21AB = {
+			isa = PBXGroup;
+			children = (
+				BC01BEE91BDBD93500AC21AB /* CanOpener */,
+				BC01BEF91BDBD93500AC21AB /* CanOpenerTests */,
+				BC01BF041BDBD93500AC21AB /* CanOpenerUITests */,
+				BC01BEE81BDBD93500AC21AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BC01BEE81BDBD93500AC21AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC01BEE71BDBD93500AC21AB /* CanOpener.app */,
+				BC01BEF61BDBD93500AC21AB /* CanOpenerTests.xctest */,
+				BC01BF011BDBD93500AC21AB /* CanOpenerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC01BEE91BDBD93500AC21AB /* CanOpener */ = {
+			isa = PBXGroup;
+			children = (
+				BC01BEEA1BDBD93500AC21AB /* AppDelegate.swift */,
+				BC01BEEC1BDBD93500AC21AB /* Assets.xcassets */,
+				BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */,
+				BC01BEF11BDBD93500AC21AB /* Info.plist */,
+			);
+			path = CanOpener;
+			sourceTree = "<group>";
+		};
+		BC01BEF91BDBD93500AC21AB /* CanOpenerTests */ = {
+			isa = PBXGroup;
+			children = (
+				BC01BEFA1BDBD93500AC21AB /* CanOpenerTests.swift */,
+				BC01BEFC1BDBD93500AC21AB /* Info.plist */,
+			);
+			path = CanOpenerTests;
+			sourceTree = "<group>";
+		};
+		BC01BF041BDBD93500AC21AB /* CanOpenerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BC01BF051BDBD93500AC21AB /* CanOpenerUITests.swift */,
+				BC01BF071BDBD93500AC21AB /* Info.plist */,
+			);
+			path = CanOpenerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BC01BEE61BDBD93500AC21AB /* CanOpener */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC01BF0A1BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpener" */;
+			buildPhases = (
+				BC01BEE31BDBD93500AC21AB /* Sources */,
+				BC01BEE41BDBD93500AC21AB /* Frameworks */,
+				BC01BEE51BDBD93500AC21AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CanOpener;
+			productName = CanOpener;
+			productReference = BC01BEE71BDBD93500AC21AB /* CanOpener.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BC01BEF51BDBD93500AC21AB /* CanOpenerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC01BF0D1BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpenerTests" */;
+			buildPhases = (
+				BC01BEF21BDBD93500AC21AB /* Sources */,
+				BC01BEF31BDBD93500AC21AB /* Frameworks */,
+				BC01BEF41BDBD93500AC21AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC01BEF81BDBD93500AC21AB /* PBXTargetDependency */,
+			);
+			name = CanOpenerTests;
+			productName = CanOpenerTests;
+			productReference = BC01BEF61BDBD93500AC21AB /* CanOpenerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BC01BF001BDBD93500AC21AB /* CanOpenerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC01BF101BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpenerUITests" */;
+			buildPhases = (
+				BC01BEFD1BDBD93500AC21AB /* Sources */,
+				BC01BEFE1BDBD93500AC21AB /* Frameworks */,
+				BC01BEFF1BDBD93500AC21AB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC01BF031BDBD93500AC21AB /* PBXTargetDependency */,
+			);
+			name = CanOpenerUITests;
+			productName = CanOpenerUITests;
+			productReference = BC01BF011BDBD93500AC21AB /* CanOpenerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BC01BEDF1BDBD93500AC21AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Heroic Software Inc.";
+				TargetAttributes = {
+					BC01BEE61BDBD93500AC21AB = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					BC01BEF51BDBD93500AC21AB = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = BC01BEE61BDBD93500AC21AB;
+					};
+					BC01BF001BDBD93500AC21AB = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = BC01BEE61BDBD93500AC21AB;
+					};
+				};
+			};
+			buildConfigurationList = BC01BEE21BDBD93500AC21AB /* Build configuration list for PBXProject "CanOpener" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BC01BEDE1BDBD93500AC21AB;
+			productRefGroup = BC01BEE81BDBD93500AC21AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BC01BEE61BDBD93500AC21AB /* CanOpener */,
+				BC01BEF51BDBD93500AC21AB /* CanOpenerTests */,
+				BC01BF001BDBD93500AC21AB /* CanOpenerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BC01BEE51BDBD93500AC21AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC01BEED1BDBD93500AC21AB /* Assets.xcassets in Resources */,
+				BC01BEF01BDBD93500AC21AB /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC01BEF41BDBD93500AC21AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC01BEFF1BDBD93500AC21AB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC01BEE31BDBD93500AC21AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC01BEEB1BDBD93500AC21AB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC01BEF21BDBD93500AC21AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC01BEFB1BDBD93500AC21AB /* CanOpenerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC01BEFD1BDBD93500AC21AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC01BF061BDBD93500AC21AB /* CanOpenerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC01BEF81BDBD93500AC21AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC01BEE61BDBD93500AC21AB /* CanOpener */;
+			targetProxy = BC01BEF71BDBD93500AC21AB /* PBXContainerItemProxy */;
+		};
+		BC01BF031BDBD93500AC21AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC01BEE61BDBD93500AC21AB /* CanOpener */;
+			targetProxy = BC01BF021BDBD93500AC21AB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC01BEEF1BDBD93500AC21AB /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BC01BF081BDBD93500AC21AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BC01BF091BDBD93500AC21AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BC01BF0B1BDBD93500AC21AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CanOpener/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpener;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BC01BF0C1BDBD93500AC21AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CanOpener/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpener;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BC01BF0E1BDBD93500AC21AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CanOpenerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpenerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CanOpener.app/Contents/MacOS/CanOpener";
+			};
+			name = Debug;
+		};
+		BC01BF0F1BDBD93500AC21AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CanOpenerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpenerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CanOpener.app/Contents/MacOS/CanOpener";
+			};
+			name = Release;
+		};
+		BC01BF111BDBD93500AC21AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CanOpenerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpenerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CanOpener;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		BC01BF121BDBD93500AC21AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CanOpenerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpenerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = CanOpener;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BC01BEE21BDBD93500AC21AB /* Build configuration list for PBXProject "CanOpener" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC01BF081BDBD93500AC21AB /* Debug */,
+				BC01BF091BDBD93500AC21AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC01BF0A1BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpener" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC01BF0B1BDBD93500AC21AB /* Debug */,
+				BC01BF0C1BDBD93500AC21AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BC01BF0D1BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpenerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC01BF0E1BDBD93500AC21AB /* Debug */,
+				BC01BF0F1BDBD93500AC21AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BC01BF101BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpenerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC01BF111BDBD93500AC21AB /* Debug */,
+				BC01BF121BDBD93500AC21AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BC01BEDF1BDBD93500AC21AB /* Project object */;
+}
