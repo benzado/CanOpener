@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6233" systemVersion="14A329f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6233"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,11 +12,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target">
-            <connections>
-                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
-            </connections>
-        </customObject>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CanOpener" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -627,6 +624,56 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Test" id="UIG-Ge-Kw8">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Test" id="1dR-ZH-4Nq">
+                        <items>
+                            <menuItem title="http://www.tired.com/" id="bpc-PC-Atv">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="NuV-wg-CRg"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="5ut-5l-rp1"/>
+                            <menuItem title="http://example.com/exitCode" id="Ajn-w0-Y4T">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="Vnt-nq-N7B"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="http://example.com/noUse" id="NG3-5F-SaW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="tDL-qv-1Yc"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="http://example.com/unknownApp" id="xY4-eN-hRj">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="ID4-ha-HUH"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="http://example.com/invalidURL" id="gvE-ed-pLX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="iFd-36-y0A"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="http://example.com/availableApps" id="hgI-Dw-ptr">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="55K-D8-cWM"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="http://example.com/runningApps" id="baA-wG-Jok">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="t2T-zz-H30"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -666,15 +713,5 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="CanOpener" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
-            <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
-                <autoresizingMask key="autoresizingMask"/>
-            </view>
-        </window>
     </objects>
 </document>

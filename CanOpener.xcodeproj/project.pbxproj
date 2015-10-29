@@ -12,6 +12,13 @@
 		BC01BEF01BDBD93500AC21AB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */; };
 		BC01BEFB1BDBD93500AC21AB /* CanOpenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC01BEFA1BDBD93500AC21AB /* CanOpenerTests.swift */; };
 		BC01BF061BDBD93500AC21AB /* CanOpenerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC01BF051BDBD93500AC21AB /* CanOpenerUITests.swift */; };
+		BC08A6AA1BDE89F900496430 /* URLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC08A6A91BDE89F900496430 /* URLOpener.swift */; };
+		BC911A8C1BDF4F210092C9D1 /* lib-ruby in Resources */ = {isa = PBXBuildFile; fileRef = BC911A8B1BDF4F210092C9D1 /* lib-ruby */; };
+		BC911A901BE01E3E0092C9D1 /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC911A8F1BE01E3E0092C9D1 /* LineReader.swift */; };
+		BC911A951BE043D10092C9D1 /* ErrorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC911A931BE043D10092C9D1 /* ErrorWindowController.swift */; };
+		BC911A961BE043D10092C9D1 /* ErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC911A941BE043D10092C9D1 /* ErrorWindowController.xib */; };
+		BC9FA0221BE17A1C00F66066 /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */; };
+		BC9FA0231BE17A1C00F66066 /* ChooserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +50,14 @@
 		BC01BF011BDBD93500AC21AB /* CanOpenerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanOpenerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC01BF051BDBD93500AC21AB /* CanOpenerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanOpenerUITests.swift; sourceTree = "<group>"; };
 		BC01BF071BDBD93500AC21AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC01BF161BDC953F00AC21AB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BC08A6A91BDE89F900496430 /* URLOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLOpener.swift; sourceTree = "<group>"; };
+		BC911A8B1BDF4F210092C9D1 /* lib-ruby */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "lib-ruby"; sourceTree = "<group>"; };
+		BC911A8F1BE01E3E0092C9D1 /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
+		BC911A931BE043D10092C9D1 /* ErrorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorWindowController.swift; sourceTree = "<group>"; };
+		BC911A941BE043D10092C9D1 /* ErrorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorWindowController.xib; sourceTree = "<group>"; };
+		BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooserWindowController.swift; sourceTree = "<group>"; };
+		BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooserWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +88,7 @@
 		BC01BEDE1BDBD93500AC21AB = {
 			isa = PBXGroup;
 			children = (
+				BC01BF161BDC953F00AC21AB /* README.md */,
 				BC01BEE91BDBD93500AC21AB /* CanOpener */,
 				BC01BEF91BDBD93500AC21AB /* CanOpenerTests */,
 				BC01BF041BDBD93500AC21AB /* CanOpenerUITests */,
@@ -94,9 +110,16 @@
 			isa = PBXGroup;
 			children = (
 				BC01BEEA1BDBD93500AC21AB /* AppDelegate.swift */,
+				BC911A8F1BE01E3E0092C9D1 /* LineReader.swift */,
+				BC08A6A91BDE89F900496430 /* URLOpener.swift */,
 				BC01BEEC1BDBD93500AC21AB /* Assets.xcassets */,
 				BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */,
+				BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */,
+				BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */,
+				BC911A931BE043D10092C9D1 /* ErrorWindowController.swift */,
+				BC911A941BE043D10092C9D1 /* ErrorWindowController.xib */,
 				BC01BEF11BDBD93500AC21AB /* Info.plist */,
+				BC911A8B1BDF4F210092C9D1 /* lib-ruby */,
 			);
 			path = CanOpener;
 			sourceTree = "<group>";
@@ -187,6 +210,7 @@
 				TargetAttributes = {
 					BC01BEE61BDBD93500AC21AB = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = X24QAZ8G3K;
 					};
 					BC01BEF51BDBD93500AC21AB = {
 						CreatedOnToolsVersion = 7.1;
@@ -224,7 +248,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC01BEED1BDBD93500AC21AB /* Assets.xcassets in Resources */,
+				BC911A961BE043D10092C9D1 /* ErrorWindowController.xib in Resources */,
+				BC9FA0231BE17A1C00F66066 /* ChooserWindowController.xib in Resources */,
 				BC01BEF01BDBD93500AC21AB /* MainMenu.xib in Resources */,
+				BC911A8C1BDF4F210092C9D1 /* lib-ruby in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +276,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC911A951BE043D10092C9D1 /* ErrorWindowController.swift in Sources */,
+				BC911A901BE01E3E0092C9D1 /* LineReader.swift in Sources */,
+				BC08A6AA1BDE89F900496430 /* URLOpener.swift in Sources */,
+				BC9FA0221BE17A1C00F66066 /* ChooserWindowController.swift in Sources */,
 				BC01BEEB1BDBD93500AC21AB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,7 +414,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CanOpener/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpener;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benzado.CanOpener;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -395,7 +426,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = CanOpener/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heroicsoftware.CanOpener;
+				PRODUCT_BUNDLE_IDENTIFIER = com.benzado.CanOpener;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -471,6 +502,7 @@
 				BC01BF0C1BDBD93500AC21AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC01BF0D1BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpenerTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +511,7 @@
 				BC01BF0F1BDBD93500AC21AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC01BF101BDBD93500AC21AB /* Build configuration list for PBXNativeTarget "CanOpenerUITests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +520,7 @@
 				BC01BF121BDBD93500AC21AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

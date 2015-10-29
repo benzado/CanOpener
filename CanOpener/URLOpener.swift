@@ -1,0 +1,252 @@
+//
+//  URLOpener.swift
+//  CanOpener
+//
+//  Created by Benjamin Ragheb on 10/26/15.
+//  Copyright © 2015 Heroic Software Inc. All rights reserved.
+//
+
+import Cocoa
+
+@warn_unused_result func ==(lhs: URLOpener, rhs: URLOpener) -> Bool {
+    return unsafeAddressOf(lhs) == unsafeAddressOf(rhs)
+}
+
+class URLOpener : Hashable {
+    static private let taskOutputColor = NSColor.lightGrayColor()
+    static private let taskErrorColor = NSColor.orangeColor()
+
+    static private var activeOpeners = Set<URLOpener>()
+
+    private let _URL : String
+    private let _task = NSTask.init()
+    private let _taskTranscript = NSMutableAttributedString.init()
+
+    private var _taskOutputReader : LineReader?
+    private var _taskErrorReader : LineReader?
+
+    private var URLToOpen : NSURL?
+    private var bundleIDs = [String]()
+    private var scriptErrors = [String]()
+
+    static func defaultLaunchPath() -> String {
+        let home = NSHomeDirectory() as NSString
+
+        // TODO: let this be customizable
+        return home.stringByAppendingPathComponent("bin/OpenURL")
+    }
+
+    init(URL: String) {
+        _URL = URL
+        URLToOpen = NSURL.init(string: _URL)
+    }
+
+    var hashValue = random()
+
+    private func environment() -> [String: String] {
+        var environment = [
+            "URL" : _URL
+        ]
+
+        let workspace = NSWorkspace.sharedWorkspace()
+        if let callingApp = workspace.frontmostApplication {
+            if let bundleIdentifier = callingApp.bundleIdentifier {
+                environment["FROM_APP"] = bundleIdentifier
+            }
+        }
+
+        // Apple documentation says:
+        //   The bundle ID string must be a uniform type identifier (UTI) that
+        //   contains only alphanumeric (A-Z,a-z,0-9), hyphen (-), and period (.)
+        //   characters.
+        // Therefore it should be safe to use ':' as a list separator.
+        // (Spaces are theoretically OK, but I've seen them as part of App IDs
+        // in the wild.)
+
+        if let scheme = URLToOpen?.scheme {
+            let available = URLOpener.bundleIdentifiersForScheme(scheme)
+            let running = URLOpener.bundleIdentifiersForRunningApplications()
+            environment["AVAILABLE_APPS"] = available.joinWithSeparator(":")
+            environment["RUNNING_APPS"] = running.intersect(available).joinWithSeparator(":")
+        }
+
+        if let rubyLibPath = NSBundle.mainBundle().pathForResource("lib-ruby", ofType: nil) {
+            environment["RUBYLIB"] = rubyLibPath
+        }
+
+        return environment
+    }
+
+    private func pipe(prefix: String, color: NSColor) -> (NSPipe, LineReader?) {
+        let pipe = NSPipe.init()
+        let reader = LineReader.init(fileHandle: pipe.fileHandleForReading)
+
+        reader.addLineHandler { line in
+            print(prefix, line)
+        }
+
+        let outputString = _taskTranscript
+        let font = NSFont.userFixedPitchFontOfSize(0) ?? NSFont.systemFontOfSize(0)
+
+        let attributes = [
+            NSFontAttributeName: font,
+            NSForegroundColorAttributeName: color
+        ]
+
+        reader.addLineHandler { line in
+            outputString.appendAttributedString(NSAttributedString.init(string: line, attributes: attributes))
+            outputString.appendAttributedString(NSAttributedString.init(string: "\n"))
+        }
+
+        return (pipe, reader)
+    }
+
+    func run() {
+        if URLToOpen == nil {
+            failBecause("the provided URL <\(_URL)> is invalid.")
+            return
+        }
+
+        var outPipe : NSPipe
+        var errPipe : NSPipe
+
+        (outPipe, _taskOutputReader) = pipe("OUT:", color: URLOpener.taskOutputColor)
+        (errPipe, _taskErrorReader) = pipe("ERR:", color: URLOpener.taskErrorColor)
+
+        _taskOutputReader?.addLineHandler { [unowned self] line in
+            self.parseScriptCommand(line)
+        }
+
+        _taskOutputReader?.startReading()
+        _taskErrorReader?.startReading()
+
+        _task.launchPath = URLOpener.defaultLaunchPath()
+        _task.arguments = [ _URL ]
+        _task.standardOutput = outPipe
+        _task.standardError = errPipe
+        _task.currentDirectoryPath = NSTemporaryDirectory()
+        _task.environment = environment()
+
+        _task.terminationHandler = { _ in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.didTerminate()
+            }
+        }
+
+        // TODO: figure out how to guard against exceptions here
+        _task.launch()
+
+        URLOpener.activeOpeners.insert(self)
+    }
+
+    private static func regularExpressionForParsing() -> NSRegularExpression {
+        let pattern = "([[a-z][A-Z]]+): (.+)"
+        let options = NSRegularExpressionOptions.init(rawValue: 0)
+        do {
+            return try NSRegularExpression.init(pattern: pattern, options: options)
+        }
+        catch {
+            assertionFailure("Failed to compile built-in regular expression: \(pattern)")
+            return (nil as NSRegularExpression?)!
+        }
+    }
+
+    private func parseScriptCommand(line: NSString) {
+        let regExp = URLOpener.regularExpressionForParsing()
+        let rangeOfLine = NSRange.init(location: 0, length: line.length)
+        let matchOptions = NSMatchingOptions.Anchored
+        if let match = regExp.firstMatchInString(line as String, options: matchOptions, range: rangeOfLine) {
+            assert(match.numberOfRanges == 3)
+            let command = line.substringWithRange(match.rangeAtIndex(1))
+            let directObject = line.substringWithRange(match.rangeAtIndex(2))
+            executeScriptCommand(command, directObject: directObject)
+        }
+    }
+
+    private func executeScriptCommand(command: String, directObject: String) {
+        print("got command [\(command)] with object [\(directObject)]")
+        switch command {
+        case "URL":
+            if let newURL = NSURL.init(string: directObject) {
+                URLToOpen = newURL
+            } else {
+                addScriptError("\"\(directObject)\" is not a valid URL")
+            }
+        case "Use":
+            if (URLOpener.isBundleIDValid(directObject)) {
+                bundleIDs.append(directObject)
+            } else {
+                addScriptError("\"\(directObject)\" is not a valid app identifier")
+            }
+        default:
+            addScriptError("\"\(command)\" is not a recognized command")
+        }
+    }
+
+    private static func isBundleIDValid(bundleID: String) -> Bool {
+        // TODO: implement
+        return true
+    }
+
+    private func addScriptError(message: String) {
+        scriptErrors.append(message)
+    }
+
+    private func didTerminate() {
+        // I think there might be a race condition here, where the NSTask's
+        // terminationHandler is invoked before all the lines have been read
+        // from the output pipes.
+        _taskErrorReader?.stopReading()
+        _taskOutputReader?.stopReading()
+
+        _task.terminationHandler = nil
+
+        if _task.terminationReason == .UncaughtSignal {
+            failBecause("it was terminated by an uncaught signal.")
+        }
+        else if _task.terminationStatus != 0 {
+            failBecause("it terminated with a nonzero exit code \(_task.terminationStatus).")
+        }
+        else if !scriptErrors.isEmpty {
+            failBecause(scriptErrors.joinWithSeparator("; ") + ".")
+        }
+        else if bundleIDs.isEmpty {
+            failBecause("it did not specify which app to open the URL with.")
+        }
+        else {
+            ChooserWindowController.show(URLToOpen!, bundleIdentifiers: bundleIDs)
+        }
+
+        URLOpener.activeOpeners.remove(self)
+    }
+    
+    private func failBecause(reason: String) {
+        let scriptPath = _task.launchPath ?? "????"
+        let message = "The script \"\(scriptPath)\" was asked " +
+            " what to do with URL <\(_URL)>, but failed because " + reason
+        let transcript = self._taskTranscript.copy() as! NSAttributedString
+        dispatch_async(dispatch_get_main_queue()) {
+            ErrorWindowController.show(message, transcript: transcript)
+        }
+    }
+
+    private static func bundleIdentifiersForScheme(scheme: String) -> [String] {
+        // TODO: remove our own bundle identifier from list
+        if let handlers = LSCopyAllHandlersForURLScheme(scheme)?.takeRetainedValue() {
+            let handlers2 = handlers as [AnyObject]
+            return handlers2 as! [String]
+        } else {
+            return []
+        }
+    }
+
+    private static func bundleIdentifiersForRunningApplications() -> Set<String> {
+        var runningAppIDs = Set<String>()
+        for app in NSWorkspace.sharedWorkspace().runningApplications {
+            if let appID = app.bundleIdentifier {
+                runningAppIDs.insert(appID)
+            }
+        }
+        return runningAppIDs
+    }
+}

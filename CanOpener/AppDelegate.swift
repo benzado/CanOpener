@@ -11,17 +11,68 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var window: NSWindow!
-
-
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
+    func applicationWillFinishLaunching(notification: NSNotification) {
+        // Register to receive GetURL Apple Events
+        NSAppleEventManager.sharedAppleEventManager().setEventHandler(self,
+            andSelector: "handleGetURLEvent:withReplyEvent:",
+            forEventClass: UInt32(kInternetEventClass),
+            andEventID: UInt32(kAEGetURL))
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+    func applicationDidFinishLaunching(notification: NSNotification) {
+        // TODO: check if default handler
+
+        let myBundle = NSBundle.mainBundle()
+
+        let schemes = myBundle.infoDictionary?["CFBundleURLTypes"]?[0]?["CFBundleURLSchemes"] as? [String]
+
+        print(schemes)
+
+        let myID = myBundle.bundleIdentifier!
+
+        print("I am \(myID)")
+
+        schemes?.forEach { (scheme) in
+            if let handler = LSCopyDefaultHandlerForURLScheme(scheme)?.takeRetainedValue() {
+                print("\(scheme) is handled by \(handler)")
+            }
+
+            // let result = LSSetDefaultHandlerForURLScheme(scheme, myID!)
+        }
     }
 
+    func handleGetURLEvent(event: NSAppleEventDescriptor, withReplyEvent reply: NSAppleEventDescriptor) {
+        let directObject = event.paramDescriptorForKeyword(AEKeyword(keyDirectObject))
+        if let URL = directObject?.stringValue {
+            openURLString(URL)
+        }
+    }
 
+    @IBAction func simulateGetURLEvent(sender: NSMenuItem) {
+        if let finder = NSRunningApplication.runningApplicationsWithBundleIdentifier("com.apple.finder").first {
+            finder.activateWithOptions(NSApplicationActivationOptions.init(rawValue: 0))
+        }
+        let t = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * NSEC_PER_SEC))
+        dispatch_after(t, dispatch_get_main_queue()) {
+            self.openURLString(sender.title)
+        }
+    }
+
+    func openURLString(URL: String) {
+        print("open", URL)
+
+        let path = URLOpener.defaultLaunchPath()
+        if !NSFileManager.defaultManager().isExecutableFileAtPath(path) {
+            // TODO: offer to install a template
+
+            let alert = NSAlert.init()
+            alert.alertStyle = .WarningAlertStyle
+            alert.messageText = "Can Opener Script Not Found"
+            alert.informativeText = "Could not find executable script at \"\(path)\". Create one!"
+            alert.runModal()
+            return
+        }
+
+        URLOpener.init(URL: URL).run()
+    }
 }
-

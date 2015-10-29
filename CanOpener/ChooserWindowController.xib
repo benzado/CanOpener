@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9059"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ChooserWindowController" customModule="CanOpener" customModuleProvider="target">
+            <connections>
+                <outlet property="URLField" destination="IkF-g9-QM5" id="2M3-MW-zkR"/>
+                <outlet property="buttonSetView" destination="19a-Xv-B6S" id="Ukw-n0-YoX"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Choose Application" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkF-g9-QM5">
+                        <rect key="frame" x="18" y="20" width="444" height="17"/>
+                        <animations/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="http://www.example.com/path/to/file.html" id="wBu-eX-QKP">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19a-Xv-B6S">
+                        <rect key="frame" x="20" y="45" width="440" height="205"/>
+                        <animations/>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="IkF-g9-QM5" firstAttribute="top" secondItem="19a-Xv-B6S" secondAttribute="bottom" constant="8" id="1GT-cu-1xJ"/>
+                    <constraint firstAttribute="bottom" secondItem="IkF-g9-QM5" secondAttribute="bottom" constant="20" id="DKs-xo-8Mt"/>
+                    <constraint firstAttribute="trailing" secondItem="IkF-g9-QM5" secondAttribute="trailing" constant="20" id="Mql-6w-Z0u"/>
+                    <constraint firstItem="IkF-g9-QM5" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="cck-J4-oUT"/>
+                    <constraint firstItem="19a-Xv-B6S" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="jZe-31-u3o"/>
+                    <constraint firstItem="19a-Xv-B6S" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="kAl-pe-bgw"/>
+                    <constraint firstAttribute="trailing" secondItem="19a-Xv-B6S" secondAttribute="trailing" constant="20" id="m7a-PV-8NC"/>
+                </constraints>
+                <animations/>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="282" y="376"/>
+        </window>
+    </objects>
+</document>
