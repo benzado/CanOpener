@@ -26,7 +26,7 @@ class URLOpener : Hashable {
     private var _taskErrorReader : LineReader?
 
     private var URLToOpen : NSURL?
-    private var bundleIDs = [String]()
+    private var URLHandlersToUse = Set<URLHandler>()
     private var scriptErrors = [String]()
 
     static func defaultLaunchPath() -> String {
@@ -48,11 +48,8 @@ class URLOpener : Hashable {
             "URL" : _URL
         ]
 
-        let workspace = NSWorkspace.sharedWorkspace()
-        if let callingApp = workspace.frontmostApplication {
-            if let bundleIdentifier = callingApp.bundleIdentifier {
-                environment["FROM_APP"] = bundleIdentifier
-            }
+        if let frontmostBundleID = URLHandler.frontmost?.bundleIdentifier {
+            environment["FROM_APP"] = frontmostBundleID
         }
 
         // Apple documentation says:
@@ -64,10 +61,12 @@ class URLOpener : Hashable {
         // in the wild.)
 
         if let scheme = URLToOpen?.scheme {
-            let available = URLOpener.bundleIdentifiersForScheme(scheme)
-            let running = URLOpener.bundleIdentifiersForRunningApplications()
-            environment["AVAILABLE_APPS"] = available.joinWithSeparator(":")
-            environment["RUNNING_APPS"] = running.intersect(available).joinWithSeparator(":")
+            let ignorable = [ URLHandler.current! ]
+            let available = URLHandler.allForURLScheme(scheme).subtract(ignorable)
+            let running = URLHandler.running.intersect(available)
+
+            environment["AVAILABLE_APPS"] = URLHandler.encodeSequence(available)
+            environment["RUNNING_APPS"] = URLHandler.encodeSequence(running)
         }
 
         if let rubyLibPath = NSBundle.mainBundle().pathForResource("lib-ruby", ofType: nil) {
@@ -173,8 +172,8 @@ class URLOpener : Hashable {
                 addScriptError("\"\(directObject)\" is not a valid URL")
             }
         case "Use":
-            if (URLOpener.isBundleIDValid(directObject)) {
-                bundleIDs.append(directObject)
+            if let newHandler = URLHandler.init(bundleIdentifier: directObject) {
+                URLHandlersToUse.insert(newHandler)
             } else {
                 addScriptError("\"\(directObject)\" is not a valid app identifier")
             }
@@ -210,11 +209,11 @@ class URLOpener : Hashable {
         else if !scriptErrors.isEmpty {
             failBecause(scriptErrors.joinWithSeparator("; ") + ".")
         }
-        else if bundleIDs.isEmpty {
+        else if URLHandlersToUse.isEmpty {
             failBecause("it did not specify which app to open the URL with.")
         }
         else {
-            ChooserWindowController.show(URLToOpen!, bundleIdentifiers: bundleIDs)
+            ChooserWindowController.show(URLToOpen!, handlers: URLHandlersToUse)
         }
 
         URLOpener.activeOpeners.remove(self)
@@ -228,25 +227,5 @@ class URLOpener : Hashable {
         dispatch_async(dispatch_get_main_queue()) {
             ErrorWindowController.show(message, transcript: transcript)
         }
-    }
-
-    private static func bundleIdentifiersForScheme(scheme: String) -> [String] {
-        // TODO: remove our own bundle identifier from list
-        if let handlers = LSCopyAllHandlersForURLScheme(scheme)?.takeRetainedValue() {
-            let handlers2 = handlers as [AnyObject]
-            return handlers2 as! [String]
-        } else {
-            return []
-        }
-    }
-
-    private static func bundleIdentifiersForRunningApplications() -> Set<String> {
-        var runningAppIDs = Set<String>()
-        for app in NSWorkspace.sharedWorkspace().runningApplications {
-            if let appID = app.bundleIdentifier {
-                runningAppIDs.insert(appID)
-            }
-        }
-        return runningAppIDs
     }
 }

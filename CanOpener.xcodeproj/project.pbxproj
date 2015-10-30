@@ -17,6 +17,7 @@
 		BC911A901BE01E3E0092C9D1 /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC911A8F1BE01E3E0092C9D1 /* LineReader.swift */; };
 		BC911A951BE043D10092C9D1 /* ErrorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC911A931BE043D10092C9D1 /* ErrorWindowController.swift */; };
 		BC911A961BE043D10092C9D1 /* ErrorWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC911A941BE043D10092C9D1 /* ErrorWindowController.xib */; };
+		BC9242981BE33666002E7C34 /* URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9242971BE33666002E7C34 /* URLHandler.swift */; };
 		BC9FA0221BE17A1C00F66066 /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */; };
 		BC9FA0231BE17A1C00F66066 /* ChooserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		BC911A8F1BE01E3E0092C9D1 /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
 		BC911A931BE043D10092C9D1 /* ErrorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorWindowController.swift; sourceTree = "<group>"; };
 		BC911A941BE043D10092C9D1 /* ErrorWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorWindowController.xib; sourceTree = "<group>"; };
+		BC9242971BE33666002E7C34 /* URLHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLHandler.swift; sourceTree = "<group>"; };
 		BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooserWindowController.swift; sourceTree = "<group>"; };
 		BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooserWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +113,7 @@
 			children = (
 				BC01BEEA1BDBD93500AC21AB /* AppDelegate.swift */,
 				BC911A8F1BE01E3E0092C9D1 /* LineReader.swift */,
+				BC9242971BE33666002E7C34 /* URLHandler.swift */,
 				BC08A6A91BDE89F900496430 /* URLOpener.swift */,
 				BC01BEEC1BDBD93500AC21AB /* Assets.xcassets */,
 				BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */,
@@ -278,6 +281,7 @@
 			files = (
 				BC911A951BE043D10092C9D1 /* ErrorWindowController.swift in Sources */,
 				BC911A901BE01E3E0092C9D1 /* LineReader.swift in Sources */,
+				BC9242981BE33666002E7C34 /* URLHandler.swift in Sources */,
 				BC08A6AA1BDE89F900496430 /* URLOpener.swift in Sources */,
 				BC9FA0221BE17A1C00F66066 /* ChooserWindowController.swift in Sources */,
 				BC01BEEB1BDBD93500AC21AB /* AppDelegate.swift in Sources */,

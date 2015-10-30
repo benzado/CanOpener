@@ -11,6 +11,9 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    // Keep strong refrences here while the window is on the screen
+    static var activeWindowControllers = Set<NSWindowController>()
+
     func applicationWillFinishLaunching(notification: NSNotification) {
         // Register to receive GetURL Apple Events
         NSAppleEventManager.sharedAppleEventManager().setEventHandler(self,
@@ -33,11 +36,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("I am \(myID)")
 
         schemes?.forEach { (scheme) in
-            if let handler = LSCopyDefaultHandlerForURLScheme(scheme)?.takeRetainedValue() {
+            if let handler = URLHandler.defaultForURLScheme(scheme) {
                 print("\(scheme) is handled by \(handler)")
             }
-
-            // let result = LSSetDefaultHandlerForURLScheme(scheme, myID!)
         }
     }
 

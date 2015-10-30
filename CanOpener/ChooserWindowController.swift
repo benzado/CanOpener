@@ -10,42 +10,33 @@ import Cocoa
 
 class ChooserWindowController: NSWindowController, NSWindowDelegate {
 
-    // Keep strong refrences here while the window is on the screen
-    private static var visibleControllers = Set<NSWindowController>()
+    static func openURL(URL: NSURL, handler: URLHandler) {
+        if !handler.open(URL) {
+            NSBeep()
+        }
+    }
 
-    @IBOutlet weak var buttonSetView: NSStackView!
-    @IBOutlet weak var URLField: NSTextField!
+    static func show(URL: NSURL, handlers: Set<URLHandler>) {
+        assert(!handlers.isEmpty)
 
-    private var URL : NSURL!
-    private var bundleIdentifiers : [String]!
-
-    static func show(URL: NSURL, bundleIdentifiers: [String]) {
-        assert(!bundleIdentifiers.isEmpty)
-
-        if bundleIdentifiers.count == 1 {
-            openURL(URL, bundleIdentifier: bundleIdentifiers[0])
+        if handlers.count == 1 {
+            openURL(URL, handler: handlers.first!)
             return
         }
 
         let controller = ChooserWindowController.init(windowNibName: "ChooserWindowController")
         controller.URL = URL
-        controller.bundleIdentifiers = bundleIdentifiers
+        controller.handlers = Array(handlers)
         controller.showWindow(nil)
         NSApplication.sharedApplication().activateIgnoringOtherApps(true)
-        visibleControllers.insert(controller)
+        AppDelegate.activeWindowControllers.insert(controller)
     }
 
-    static func openURL(URL: NSURL, bundleIdentifier: String) {
-        let didOpen = NSWorkspace.sharedWorkspace().openURLs([URL],
-            withAppBundleIdentifier: bundleIdentifier,
-            options: .Default,
-            additionalEventParamDescriptor: nil,
-            launchIdentifiers: nil)
+    @IBOutlet weak var buttonSetView: NSStackView!
+    @IBOutlet weak var URLField: NSTextField!
 
-        if !didOpen {
-            NSBeep()
-        }
-    }
+    private var URL : NSURL!
+    private var handlers : Array<URLHandler>!
 
     private func centerWindowUnderMouseLocation() {
         if let window = self.window {
@@ -60,9 +51,7 @@ class ChooserWindowController: NSWindowController, NSWindowDelegate {
     }
 
     private func createButtons() {
-        let workspace = NSWorkspace.sharedWorkspace()
-
-        let buttons : [NSButton] = bundleIdentifiers.map { identifier in
+        let buttons : [NSButton] = handlers.map { identifier in
             let button = NSButton.init(frame: CGRect.zero)
 
             button.showsBorderOnlyWhileMouseInside = true
@@ -73,16 +62,15 @@ class ChooserWindowController: NSWindowController, NSWindowDelegate {
                 cell.showsStateBy = .ChangeBackgroundCellMask
             }
 
-            if let path = workspace.URLForApplicationWithBundleIdentifier(identifier)?.path {
-                let image = workspace.iconForFile(path)
+            if let image = identifier.icon {
                 button.image = image
             } else {
-                button.title = identifier
+                button.title = identifier.bundleIdentifier
             }
 
             button.target = self
             button.action = "buttonClicked:"
-            button.tag = self.bundleIdentifiers.indexOf(identifier)!
+            button.tag = self.handlers.indexOf(identifier)!
 
             return button
         }
@@ -102,14 +90,14 @@ class ChooserWindowController: NSWindowController, NSWindowDelegate {
 
     func buttonClicked(sender: NSButton) {
         let tag = sender.tag
-        let identifier = bundleIdentifiers[tag]
+        let handler = handlers[tag]
 
-        ChooserWindowController.openURL(URL, bundleIdentifier: identifier)
+        ChooserWindowController.openURL(URL, handler: handler)
 
         self.close()
     }
 
     func windowWillClose(notification: NSNotification) {
-        ChooserWindowController.visibleControllers.remove(self)
+        AppDelegate.activeWindowControllers.remove(self)
     }
 }

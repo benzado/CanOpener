@@ -10,9 +10,6 @@ import Cocoa
 
 class ErrorWindowController: NSWindowController, NSWindowDelegate {
 
-    // Keep strong refrences here while the window is on the screen
-    private static var visibleControllers = Set<NSWindowController>()
-
     @IBOutlet weak var titleField: NSTextField!
     @IBOutlet weak var messageField: NSTextField!
     @IBOutlet var transcriptView: NSTextView!
@@ -24,7 +21,7 @@ class ErrorWindowController: NSWindowController, NSWindowDelegate {
         let controller = ErrorWindowController.init(windowNibName: "ErrorWindowController")
         controller.message = message
         controller.transcript = transcript
-        visibleControllers.insert(controller)
+        AppDelegate.activeWindowControllers.insert(controller)
         controller.showWindow(nil)
         NSBeep()
         NSApplication.sharedApplication().activateIgnoringOtherApps(true)
@@ -54,6 +51,6 @@ class ErrorWindowController: NSWindowController, NSWindowDelegate {
     }
 
     func windowWillClose(notification: NSNotification) {
-        ErrorWindowController.visibleControllers.remove(self)
+        AppDelegate.activeWindowControllers.remove(self)
     }
 }
