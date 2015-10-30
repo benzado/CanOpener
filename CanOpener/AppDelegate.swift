@@ -58,6 +58,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    // TODO: add a test for an absurdly long URL, make sure Chooser Window isn't crazy wide
+
     func openURLString(URL: String) {
         print("open", URL)
 
