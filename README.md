@@ -63,8 +63,6 @@ top of your script, you can write code like `Safari.running?`.
 
 ## TODO
 
-Apply GPL.
-
 Make an icon.
 
 Allow user to select location of script using a standard Open panel.
