@@ -53,6 +53,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 print("\(scheme) is handled by \(handler)")
             }
         }
+
+        // Let the system terminate this app if it isn't doing anything
+        NSProcessInfo().automaticTerminationSupportEnabled = true
+
+        // Let the system mercilessly kill the app. Note that NSUserDefaults
+        // is smart enough to disable sudden termination internally to ensure
+        // data integrity.
+        NSProcessInfo().enableSuddenTermination()
     }
 
     func handleGetURLEvent(event: NSAppleEventDescriptor, withReplyEvent reply: NSAppleEventDescriptor) {
