@@ -126,6 +126,11 @@ struct URLHandler : Hashable, StringLiteralConvertible {
         }
     }
 
+    var localizedTitle : String {
+        // TODO: find localized title
+        return bundleIdentifier
+    }
+
     // MARK: - Instance Functions
 
     func open(URL: NSURL) -> Bool {

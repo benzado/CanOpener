@@ -18,14 +18,15 @@
         <window title="Choose Application" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="0.0" y="0.0" width="480" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+            <rect key="contentRect" x="905" y="459" width="240" height="153"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <value key="minSize" type="size" width="240" height="153"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="240" height="153"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IkF-g9-QM5">
-                        <rect key="frame" x="18" y="20" width="444" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IkF-g9-QM5">
+                        <rect key="frame" x="18" y="8" width="204" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" title="http://www.example.com/path/to/file.html" id="wBu-eX-QKP">
                             <font key="font" metaFont="system"/>
@@ -34,25 +35,25 @@
                         </textFieldCell>
                     </textField>
                     <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19a-Xv-B6S">
-                        <rect key="frame" x="20" y="45" width="440" height="205"/>
+                        <rect key="frame" x="0.0" y="33" width="240" height="120"/>
                         <animations/>
                     </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="IkF-g9-QM5" firstAttribute="top" secondItem="19a-Xv-B6S" secondAttribute="bottom" constant="8" id="1GT-cu-1xJ"/>
-                    <constraint firstAttribute="bottom" secondItem="IkF-g9-QM5" secondAttribute="bottom" constant="20" id="DKs-xo-8Mt"/>
+                    <constraint firstAttribute="bottom" secondItem="IkF-g9-QM5" secondAttribute="bottom" constant="8" id="DKs-xo-8Mt"/>
                     <constraint firstAttribute="trailing" secondItem="IkF-g9-QM5" secondAttribute="trailing" constant="20" id="Mql-6w-Z0u"/>
                     <constraint firstItem="IkF-g9-QM5" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="cck-J4-oUT"/>
-                    <constraint firstItem="19a-Xv-B6S" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="jZe-31-u3o"/>
-                    <constraint firstItem="19a-Xv-B6S" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="kAl-pe-bgw"/>
-                    <constraint firstAttribute="trailing" secondItem="19a-Xv-B6S" secondAttribute="trailing" constant="20" id="m7a-PV-8NC"/>
+                    <constraint firstItem="19a-Xv-B6S" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="jZe-31-u3o"/>
+                    <constraint firstItem="19a-Xv-B6S" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="kAl-pe-bgw"/>
+                    <constraint firstAttribute="trailing" secondItem="19a-Xv-B6S" secondAttribute="trailing" id="m7a-PV-8NC"/>
                 </constraints>
                 <animations/>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="282" y="376"/>
+            <point key="canvasLocation" x="288" y="329.5"/>
         </window>
     </objects>
 </document>

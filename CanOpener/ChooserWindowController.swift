@@ -76,14 +76,16 @@ class ChooserWindowController: NSWindowController, NSWindowDelegate {
             }
 
             if let image = identifier.icon {
+                image.size = CGSize.init(width: 128, height: 128)
                 button.image = image
             } else {
-                button.title = identifier.bundleIdentifier
+                button.title = identifier.localizedTitle
             }
 
             button.target = self
             button.action = "buttonClicked:"
             button.tag = self.handlers.indexOf(identifier)!
+            button.toolTip = identifier.URL?.path
 
             return button
         }
