@@ -659,6 +659,12 @@
                                     <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="iFd-36-y0A"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="http://example.com/longURL" id="buB-lg-1dn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="simulateGetURLEvent:" target="Voe-Tx-rLC" id="Es7-4f-nNi"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="http://example.com/availableApps" id="hgI-Dw-ptr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

@@ -79,6 +79,10 @@ VLC = App.new('org.videolan.vlc')
         AVAILABLE_APPS.each { |app| $stdout.puts "Use: #{app}" }
     when 'runningApps'
         RUNNING_APPS.each { |app| $stdout.puts "Use: #{app}" }
+    when 'longURL'
+        puts 'Use: appA'
+        puts 'Use: appB'
+        puts 'URL: http://example.com/' + ('lol' * 100)
     end
     exit 0
 end
