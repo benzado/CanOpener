@@ -25,12 +25,11 @@ class LineReader {
     let fileHandle : NSFileHandle
     let encoding : NSStringEncoding
 
-    var lineHandlers : [ (dispatch_queue_t, ((String) -> ())) ] = []
-    let buffer : NSMutableData
+    private var lineHandlers : [ (dispatch_queue_t, ((String) -> ())) ] = []
+    private let bufferedData = NSMutableData.init()
 
     init(fileHandle: NSFileHandle, encoding: NSStringEncoding = NSASCIIStringEncoding) {
         self.fileHandle = fileHandle
-        self.buffer = NSMutableData.init()
         self.encoding = encoding
     }
 
@@ -46,13 +45,22 @@ class LineReader {
         // This will create a retain cycle: self -> fileHandle -> block -> self,
         // however that will be broken by a call to stopReading()
         fileHandle.readabilityHandler = { handle in
-            self.buffer.appendData(handle.availableData)
-            while let line = self.readLine() {
+            let data = handle.availableData
+
+            self.bufferedData.appendData(data)
+
+            if let lines = self.readLines() {
                 for (queue, handler) in self.lineHandlers {
                     dispatch_async(queue) {
-                        handler(line)
+                        for s in lines {
+                            handler(s)
+                        }
                     }
                 }
+            }
+            
+            if data.length == 0 {
+                self.stopReading()
             }
         }
     }
@@ -61,26 +69,28 @@ class LineReader {
         fileHandle.readabilityHandler = nil
     }
 
-    private func readLine() -> String? {
-        var lineTerminatorByte = 0x0a
-        let lineTerminatorData = NSData.init(bytesNoCopy: &lineTerminatorByte, length: 1, freeWhenDone: false)
+    private static let terminatorByte = CChar(0x0a)
 
-        let wholeRange = NSRange.init(location: 0, length: buffer.length)
-        let options = NSDataSearchOptions.init(rawValue: 0)
-        let foundRange = buffer.rangeOfData(lineTerminatorData, options: options, range: wholeRange)
+    private func readLines() -> [String]? {
+        let bytes = UnsafePointer<CChar>(bufferedData.bytes)
+        let terminatorIndices = (0 ..< bufferedData.length)
+            .filter { bytes[$0] == LineReader.terminatorByte }
 
-        if foundRange.location == NSNotFound {
-            return nil
+        if terminatorIndices.isEmpty { return nil }
+
+        let lineIndices = [0] + terminatorIndices.map { $0.successor() }
+        let lines = zip(lineIndices, terminatorIndices)
+            .map { bufferedData.subdataWithRange(NSRange.init($0 ..< $1)) }
+            .flatMap { String.init(data: $0, encoding: self.encoding) }
+
+        let remainderIndex = terminatorIndices.last!.successor()
+        if remainderIndex < bufferedData.length {
+            let remainderRange = remainderIndex ..< bufferedData.length
+            bufferedData.setData(bufferedData.subdataWithRange(NSRange.init(remainderRange)))
+        } else {
+            bufferedData.length = 0
         }
 
-        let lineRange = NSRange.init(location: 0, length: foundRange.location)
-        let lineData = buffer.subdataWithRange(lineRange)
-
-        let line = String.init(data: lineData, encoding: encoding)
-
-        let replacementRange = NSRange.init(location: 0, length: lineRange.length + 1)
-        buffer.replaceBytesInRange(replacementRange, withBytes: nil, length: 0)
-
-        return line
+        return lines
     }
 }
