@@ -94,7 +94,6 @@ class ChooserWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        self.window?.delegate = self
         centerWindowUnderMouseLocation()
 
         self.URLField.stringValue = URL.absoluteString

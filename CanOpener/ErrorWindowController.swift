@@ -44,7 +44,6 @@ class ErrorWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        self.window?.delegate = self
         self.window?.center()
 
         let textView = self.transcriptView
