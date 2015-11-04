@@ -70,6 +70,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @IBAction func showPreferences(sender: NSMenuItem) {
+        PreferencesWindowController.show()
+    }
+
     @IBAction func simulateGetURLEvent(sender: NSMenuItem) {
         if let finder = NSRunningApplication.runningApplicationsWithBundleIdentifier("com.apple.finder").first {
             finder.activateWithOptions(NSApplicationActivationOptions.init(rawValue: 0))
@@ -83,16 +87,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // TODO: add a test for an absurdly long URL, make sure Chooser Window isn't crazy wide
 
     func openURLString(URL: String) {
-        print("open", URL)
+        // TODO: offer to install a template
 
-        let path = URLOpener.defaultLaunchPath()
-        if !NSFileManager.defaultManager().isExecutableFileAtPath(path) {
-            // TODO: offer to install a template
-
+        if let path = URLOpener.scriptPath {
+            if !NSFileManager.defaultManager().isExecutableFileAtPath(path) {
+                let alert = NSAlert.init()
+                alert.alertStyle = .WarningAlertStyle
+                alert.messageText = "Can Opener Script Not Found"
+                alert.informativeText = "Could not find executable script at \"\(path)\". Create one!"
+                alert.runModal()
+                return
+            }
+        } else {
             let alert = NSAlert.init()
             alert.alertStyle = .WarningAlertStyle
-            alert.messageText = "Can Opener Script Not Found"
-            alert.informativeText = "Could not find executable script at \"\(path)\". Create one!"
+            alert.messageText = "No Can Opener Script Set"
+            alert.informativeText = "Script not set! Go to preferences and set one."
             alert.runModal()
             return
         }

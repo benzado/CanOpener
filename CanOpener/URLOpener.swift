@@ -26,6 +26,7 @@ import Cocoa
 }
 
 class URLOpener : Hashable {
+
     static private let taskOutputColor = NSColor.lightGrayColor()
     static private let taskErrorColor = NSColor.orangeColor()
 
@@ -42,11 +43,16 @@ class URLOpener : Hashable {
     private var URLHandlersToUse = Set<URLHandler>()
     private var scriptErrors = [String]()
 
-    static func defaultLaunchPath() -> String {
-        let home = NSHomeDirectory() as NSString
 
-        // TODO: let this be customizable
-        return home.stringByAppendingPathComponent("bin/OpenURL")
+    static private let scriptPathUserDefaultsKey = "CanOpenerScriptPath"
+
+    static var scriptPath : String? {
+        get {
+            return NSUserDefaults().stringForKey(scriptPathUserDefaultsKey)
+        }
+        set(newPath) {
+            NSUserDefaults().setObject(newPath, forKey: scriptPathUserDefaultsKey)
+        }
     }
 
     init(URL: String) {
@@ -132,7 +138,7 @@ class URLOpener : Hashable {
         _taskOutputReader?.startReading()
         _taskErrorReader?.startReading()
 
-        _task.launchPath = URLOpener.defaultLaunchPath()
+        _task.launchPath = URLOpener.scriptPath
         _task.arguments = [ _URL ]
         _task.standardOutput = outPipe
         _task.standardError = errPipe
@@ -144,6 +150,8 @@ class URLOpener : Hashable {
                 self.didTerminate()
             }
         }
+
+        // TODO: verify script path
 
         // TODO: figure out how to guard against exceptions here
         _task.launch()

@@ -20,6 +20,8 @@
 		BC9242981BE33666002E7C34 /* URLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9242971BE33666002E7C34 /* URLHandler.swift */; };
 		BC9FA0221BE17A1C00F66066 /* ChooserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */; };
 		BC9FA0231BE17A1C00F66066 /* ChooserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */; };
+		BCC402B91BEA7B16000E347C /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC402B71BEA7B16000E347C /* PreferencesWindowController.swift */; };
+		BCC402BA1BEA7B16000E347C /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCC402B81BEA7B16000E347C /* PreferencesWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		BC9242971BE33666002E7C34 /* URLHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLHandler.swift; sourceTree = "<group>"; };
 		BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooserWindowController.swift; sourceTree = "<group>"; };
 		BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooserWindowController.xib; sourceTree = "<group>"; };
+		BCC402B71BEA7B16000E347C /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		BCC402B81BEA7B16000E347C /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,8 @@
 				BC08A6A91BDE89F900496430 /* URLOpener.swift */,
 				BC01BEEC1BDBD93500AC21AB /* Assets.xcassets */,
 				BC01BEEE1BDBD93500AC21AB /* MainMenu.xib */,
+				BCC402B71BEA7B16000E347C /* PreferencesWindowController.swift */,
+				BCC402B81BEA7B16000E347C /* PreferencesWindowController.xib */,
 				BC9FA0201BE17A1C00F66066 /* ChooserWindowController.swift */,
 				BC9FA0211BE17A1C00F66066 /* ChooserWindowController.xib */,
 				BC911A931BE043D10092C9D1 /* ErrorWindowController.swift */,
@@ -250,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCC402BA1BEA7B16000E347C /* PreferencesWindowController.xib in Resources */,
 				BC01BEED1BDBD93500AC21AB /* Assets.xcassets in Resources */,
 				BC911A961BE043D10092C9D1 /* ErrorWindowController.xib in Resources */,
 				BC9FA0231BE17A1C00F66066 /* ChooserWindowController.xib in Resources */,
@@ -283,6 +290,7 @@
 				BC911A901BE01E3E0092C9D1 /* LineReader.swift in Sources */,
 				BC9242981BE33666002E7C34 /* URLHandler.swift in Sources */,
 				BC08A6AA1BDE89F900496430 /* URLOpener.swift in Sources */,
+				BCC402B91BEA7B16000E347C /* PreferencesWindowController.swift in Sources */,
 				BC9FA0221BE17A1C00F66066 /* ChooserWindowController.swift in Sources */,
 				BC01BEEB1BDBD93500AC21AB /* AppDelegate.swift in Sources */,
 			);
