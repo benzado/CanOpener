@@ -83,7 +83,7 @@ class ChooserWindowController: NSWindowController, NSWindowDelegate {
             }
 
             button.target = self
-            button.action = "buttonClicked:"
+            button.action = #selector(ChooserWindowController.buttonClicked(_:))
             button.tag = self.handlers.indexOf(identifier)!
             button.toolTip = identifier.URL?.path
 

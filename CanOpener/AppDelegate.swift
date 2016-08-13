@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(notification: NSNotification) {
         // Register to receive GetURL Apple Events
         NSAppleEventManager.sharedAppleEventManager().setEventHandler(self,
-            andSelector: "handleGetURLEvent:withReplyEvent:",
+            andSelector: #selector(AppDelegate.handleGetURLEvent(_:withReplyEvent:)),
             forEventClass: UInt32(kInternetEventClass),
             andEventID: UInt32(kAEGetURL))
     }
