@@ -21,19 +21,15 @@
 
 import Cocoa
 
-@warn_unused_result func ==(lhs: URLOpener, rhs: URLOpener) -> Bool {
-    return unsafeAddressOf(lhs) == unsafeAddressOf(rhs)
-}
+// I want to fire the termination handler when
+// - (the script has terminated AND the file is closed) OR there has been a timeout
 
-class URLOpener : Hashable {
+final class URLOpener : Hashable {
 
     static private let taskOutputColor = NSColor.lightGrayColor()
     static private let taskErrorColor = NSColor.orangeColor()
 
-    static private var activeOpeners = Set<URLOpener>()
-
     private let _URL : String
-    private let _task = NSTask.init()
     private let _taskTranscript = NSMutableAttributedString.init()
 
     private var _taskOutputReader : LineReader?
@@ -43,6 +39,7 @@ class URLOpener : Hashable {
     private var URLHandlersToUse = Set<URLHandler>()
     private var scriptErrors = [String]()
 
+    private let group = dispatch_group_create()
 
     static private let scriptPathUserDefaultsKey = "CanOpenerScriptPath"
 
@@ -97,30 +94,26 @@ class URLOpener : Hashable {
 
     private func pipe(prefix: String, color: NSColor) -> (NSPipe, LineReader?) {
         let pipe = NSPipe.init()
-        let reader = LineReader.init(fileHandle: pipe.fileHandleForReading)
+        let reader = LineReader.init(fileHandle: pipe.fileHandleForReading, group: group)
 
-        reader.addLineHandler { line in
-            print(prefix, line)
-        }
-
-        let outputString = _taskTranscript
         let font = NSFont.userFixedPitchFontOfSize(0) ?? NSFont.systemFontOfSize(0)
-
         let attributes = [
             NSFontAttributeName: font,
             NSForegroundColorAttributeName: color
         ]
 
-        reader.addLineHandler { line in
-            outputString.appendAttributedString(NSAttributedString.init(string: line, attributes: attributes))
-            outputString.appendAttributedString(NSAttributedString.init(string: "\n"))
+        reader.addLineHandler { [unowned self] line in
+            print(prefix, line)
+
+            self._taskTranscript.appendAttributedString(NSAttributedString.init(string: line, attributes: attributes))
+            self._taskTranscript.appendAttributedString(NSAttributedString.init(string: "\n"))
         }
 
         return (pipe, reader)
     }
 
     func run() {
-        if URLToOpen == nil {
+        guard URLToOpen != nil else {
             failBecause("the provided URL <\(_URL)> is invalid.")
             return
         }
@@ -138,25 +131,29 @@ class URLOpener : Hashable {
         _taskOutputReader?.startReading()
         _taskErrorReader?.startReading()
 
-        _task.launchPath = URLOpener.scriptPath
-        _task.arguments = [ _URL ]
-        _task.standardOutput = outPipe
-        _task.standardError = errPipe
-        _task.currentDirectoryPath = NSTemporaryDirectory()
-        _task.environment = environment()
-
-        _task.terminationHandler = { _ in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.didTerminate()
-            }
-        }
+        let task = NSTask.init()
 
         // TODO: verify script path
+        task.launchPath = URLOpener.scriptPath
+        task.arguments = [ _URL ]
+        task.standardOutput = outPipe
+        task.standardError = errPipe
+        task.currentDirectoryPath = NSTemporaryDirectory()
+        task.environment = environment()
+
+        dispatch_group_enter(group);
+        task.terminationHandler = { _ in
+            dispatch_group_leave(self.group)
+//            self._taskErrorReader?.stopReading()
+//            self._taskOutputReader?.stopReading()
+        }
 
         // TODO: figure out how to guard against exceptions here
-        _task.launch()
+        task.launch()
 
-        URLOpener.activeOpeners.insert(self)
+        dispatch_group_notify(group, dispatch_get_main_queue()) {
+            self.taskDidTerminate(task)
+        }
     }
 
     private static func regularExpressionForParsing() -> NSRegularExpression {
@@ -212,36 +209,34 @@ class URLOpener : Hashable {
         scriptErrors.append(message)
     }
 
-    private func didTerminate() {
-        // I think there might be a race condition here, where the NSTask's
-        // terminationHandler is invoked before all the lines have been read
-        // from the output pipes.
-        _taskErrorReader?.stopReading()
-        _taskOutputReader?.stopReading()
-
-        _task.terminationHandler = nil
-
-        if _task.terminationReason == .UncaughtSignal {
-            failBecause("it was terminated by an uncaught signal.")
+    private func taskDidTerminate(task: NSTask) {
+        if task.terminationReason == .UncaughtSignal {
+            failBecause(task, "it was terminated by an uncaught signal.")
         }
-        else if _task.terminationStatus != 0 {
-            failBecause("it terminated with a nonzero exit code \(_task.terminationStatus).")
+        else if task.terminationStatus != 0 {
+            failBecause(task, "it terminated with a nonzero exit code \(task.terminationStatus).")
         }
         else if !scriptErrors.isEmpty {
-            failBecause(scriptErrors.joinWithSeparator("; ") + ".")
+            failBecause(task, scriptErrors.joinWithSeparator("; ") + ".")
         }
         else if URLHandlersToUse.isEmpty {
-            failBecause("it did not specify which app to open the URL with.")
+            failBecause(task, "it did not specify which app to open the URL with.")
         }
         else {
             ChooserWindowController.show(URLToOpen!, handlers: URLHandlersToUse)
         }
-
-        URLOpener.activeOpeners.remove(self)
     }
-    
+
     private func failBecause(reason: String) {
-        let scriptPath = _task.launchPath ?? "????"
+        let message = "CanOpener failed because \(reason)"
+        let transcript = self._taskTranscript.copy() as! NSAttributedString
+        dispatch_async(dispatch_get_main_queue()) {
+            ErrorWindowController.show(message, transcript: transcript)
+        }
+    }
+
+    private func failBecause(task: NSTask, _ reason: String) {
+        let scriptPath = task.launchPath ?? "????"
         let message = "The script \"\(scriptPath)\" was asked " +
             " what to do with URL <\(_URL)>, but failed because " + reason
         let transcript = self._taskTranscript.copy() as! NSAttributedString
@@ -249,4 +244,8 @@ class URLOpener : Hashable {
             ErrorWindowController.show(message, transcript: transcript)
         }
     }
+}
+
+@warn_unused_result func == (lhs: URLOpener, rhs: URLOpener) -> Bool {
+    return unsafeAddressOf(lhs) == unsafeAddressOf(rhs)
 }

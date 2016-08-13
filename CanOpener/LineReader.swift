@@ -24,13 +24,15 @@ import Cocoa
 class LineReader {
     let fileHandle : NSFileHandle
     let encoding : NSStringEncoding
+    let group : dispatch_group_t?
 
     private var lineHandlers : [ (dispatch_queue_t, ((String) -> ())) ] = []
     private let bufferedData = NSMutableData.init()
 
-    init(fileHandle: NSFileHandle, encoding: NSStringEncoding = NSASCIIStringEncoding) {
+    init(fileHandle: NSFileHandle, encoding: NSStringEncoding = NSASCIIStringEncoding, group: dispatch_group_t? = nil) {
         self.fileHandle = fileHandle
         self.encoding = encoding
+        self.group = group
     }
 
     func addLineHandler(queue: dispatch_queue_t, handler: (String) -> ()) {
@@ -42,6 +44,7 @@ class LineReader {
     }
 
     func startReading() {
+        if let g = group { dispatch_group_enter(g) }
         // This will create a retain cycle: self -> fileHandle -> block -> self,
         // however that will be broken by a call to stopReading()
         fileHandle.readabilityHandler = { handle in
@@ -66,7 +69,10 @@ class LineReader {
     }
 
     func stopReading() {
-        fileHandle.readabilityHandler = nil
+        if fileHandle.readabilityHandler != nil {
+            fileHandle.readabilityHandler = nil
+            if let g = group { dispatch_group_leave(g) }
+        }
     }
 
     private static let terminatorByte = CChar(0x0a)
