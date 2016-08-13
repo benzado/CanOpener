@@ -13,11 +13,13 @@ and does what the script tells it to do.
 
 ## Free Software
 
-Can Opener is free software. It is licensed under the GNU General Public
-License, which protects your freedoms as a user of the software.
+Can Opener is free software. It is licensed under the [GNU General Public
+License][gpl], which protects your freedoms as a user of the software.
 
 For example, you can inspect the source code to verify that it doesn't track
 which websites you visit and transmit that information without your consent.
+
+[gpl]: http://www.gnu.org/licenses/quick-guide-gplv3.html
 
 ## Script API
 
@@ -25,15 +27,15 @@ You can write your URL opening script in whatever language you choose: Ruby,
 Python, Bash, C, C++, PHP, etc. As long as the script can read environment
 variables and write to standard output, it is supported.
 
-The URL to be opened is passed in as the first command line argument, and also
-in the environment with the name `URL`.
+- The URL to be opened is passed in as the first command line argument, and
+  also in the environment with the name `URL`.
 
-If any applications are installed which claim to handle URLs of that scheme,
-their bundle identifiers are provided as a colon-separated list in the
-environment variable `AVAILABLE_APPS`.
+- If any applications are installed which claim to handle URLs of that scheme,
+  their bundle identifiers are provided as a colon-separated list in the
+  environment variable `AVAILABLE_APPS`.
 
-The subset of those apps that are running are provided in the environment
-variable `RUNNING_APPS`, in the same format.
+- The subset of those apps that are running are provided in the environment
+  variable `RUNNING_APPS`, in the same format.
 
 The script communicates back to Can Opener by printing to standard output.
 
@@ -54,7 +56,9 @@ The script must print at least one `Use:` line.
 
 Optionally, the script can choose a different URL to open by printing `URL:`,
 followed by a space, followed by the new URL. This is useful, for example, if
-you want to redirect `feed:` URLs to a web app like NewsBlur.
+you want to redirect `feed:` URLs to a web app like [NewsBlur][nb].
+
+[nb]: http://www.newsblur.com
 
 ### Ruby Support
 
@@ -65,9 +69,19 @@ top of your script, you can write code like `Safari.running?`.
 
 Make an icon.
 
-Allow user to select location of script using a standard Open panel.
+Keyboard control of the browser chooser window: right-left arrows to choose
+a button, return to open, escape to close window.
 
-Offer to install an example script if none found.
+Store the contents of the script file, and not just the path, in
+NSUserDefaults. Or make the script file a fixed location (for example, in
+the user's Library folder). Either way, it doesn't make a lot of sense to
+have the script location be configurable; it just makes getting started more
+difficult.
+
+Can Opener's preferences window should include a script editor.
+
+It should use a default script that chooses from running browsers. This would
+make Can Opener more useful "out of the box".
 
 The Chooser Window could be a whole lot more slick looking.
 
@@ -84,16 +98,21 @@ _See the source code for more TODO comments._
 
 # References
 
-[Choosy: a smarter default browser][choosy]. This app is very similar to Can
-Opener, but it hasn't been updated in a while and the source is not available.
+[Choosy: a smarter default browser][choosy]. Choosy is very similar to Can
+Opener, but it is proprietary and non-free. At the time I began working on
+Can Opener (October 2015) it also hadn't been updated in several years.
+
+Since then, version 1.1 was released in January 2016, so if you are looking
+for something similar to Can Opener but easier-to-use, check it out.
 
 [choosy]: http://www.choosyosx.com/
 
-[Bwana: A man page reader for your browser][bwana]. The source code was a useful
-reference for handling GetURL Apple Events.
+[Bwana: A man page reader for your browser][bwana]. The source code was a
+useful reference for handling GetURL Apple Events.
 
 [bwana]: https://bitbucket.org/bruji/bwana/
 
-[Make Your Own URL Protocol and Handler][macguy]. A similar idea, in AppleScript.
+[Make Your Own URL Protocol and Handler][macguy]. A similar idea, in
+AppleScript.
 
 [macguy]: https://yourmacguy.wordpress.com/2013/07/17/make-your-own-url-handler/
